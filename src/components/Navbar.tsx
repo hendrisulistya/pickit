@@ -1,73 +1,77 @@
-import logo from '../assets/logo.svg'
+import  { useState } from 'react';
+import { Link } from 'react-router-dom';
+import logo from '../assets/logo.svg';
 
 function Navbar() {
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
-  type menuList = {
-    name: string,
-    url: string
-  }
+  const toggleMobileMenu = () => {
+    setIsMobileMenuOpen(!isMobileMenuOpen);
+  };
 
-  const menuList: menuList[] = [
-    {
-      name: 'tshirt',
-      url: '/tshirt'
-    },
-    {
-      name: 'blouse',
-      url: '/blouse'
-    },
-    {
-      name: 'sweater',
-      url: '/sweater'
-    }
+  const menuItems = [
+    { name: 'Home', url: '/' },
+    { name: 'Request', url: '/request' },
+    { name: 'Order', url: '/order' },
   ];
-  
-  const menuItems = menuList.map((item) => (
-    <li key={item.name}>
-      <a href={item.url}>{item.name}</a>
-    </li>
-  ));
-
-
-  console.log(menuItems)
-
-  
-
 
   return (
-    <nav className="bg-white dark:bg-gray-900 fixed w-full z-20 top-0 left-0 border-b border-gray-200 dark:border-gray-600">
-  <div className="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
-  <a href="https://flowbite.com/" className="flex items-center">
-      <img src={logo} className="h-8 mr-3" alt="App Logo" />
-      <span className="self-center text-2xl font-semibold whitespace-nowrap dark:text-white">Pick It</span>
-  </a>
-  <div className="flex md:order-2">
-      <button data-collapse-toggle="navbar-sticky" type="button" className="inline-flex items-center p-2 w-10 h-10 justify-center text-sm text-gray-500 rounded-lg md:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600" aria-controls="navbar-sticky" aria-expanded="false">
-        <span className="sr-only">Open main menu</span>
-        <svg className="w-5 h-5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 17 14">
-            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 1h15M1 7h15M1 13h15"/>
-        </svg>
-    </button>
-  </div>
-  <div className="items-center justify-between hidden w-full md:flex md:w-auto md:order-1" id="navbar-sticky">
-    <ul className="flex flex-col p-4 md:p-0 mt-4 font-medium border border-gray-100 rounded-lg bg-gray-50 md:flex-row md:space-x-8 md:mt-0 md:border-0 md:bg-white dark:bg-gray-800 md:dark:bg-gray-900 dark:border-gray-700">
-      <li>
-        <a href="#" className="block py-2 pl-3 pr-4 text-white bg-blue-700 rounded md:bg-transparent md:text-blue-700 md:p-0 md:dark:text-blue-500" aria-current="page">Home</a>
-      </li>
-      <li>
-        <a href="#" className="block py-2 pl-3 pr-4 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 md:dark:hover:text-blue-500 dark:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700">About</a>
-      </li>
-      <li>
-        <a href="#" className="block py-2 pl-3 pr-4 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 md:dark:hover:text-blue-500 dark:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700">Services</a>
-      </li>
-      <li>
-        <a href="#" className="block py-2 pl-3 pr-4 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 md:dark:hover:text-blue-500 dark:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700">Contact</a>
-      </li>
-    </ul>
-  </div>
-  </div>
-</nav>
-  )
+    <nav className="bg-neutral-500 shadow">
+      <div className="px-8 mx-auto max-w-9xl">
+        <div className="flex items-center justify-between h-16">
+          <div className="w-full flex items-center">
+            <Link to="/" className="flex items-center space-x-2">
+              <img src={logo} alt="logo" className="w-1/12 p-5" />
+              <p className="text-gray-300 font-black text-2xl">PICK IT</p>
+            </Link>
+            <div className="hidden md:block ml-10 space-x-4">
+              {menuItems.map((item) => (
+                <Link key={item.url} to={item.url}>
+                  <a className="text-black hover:text-cyan-500 dark:hover:text-white px-3 py-2 rounded-md text-sm font-medium">
+                    {item.name}
+                  </a>
+                </Link>
+              ))}
+            </div>
+          </div>
+          <div className="block">
+            <div className="flex items-center ml-4 md:ml-6"></div>
+          </div>
+          <div className="flex -mr-2 md:hidden">
+            <button
+              onClick={toggleMobileMenu}
+              className="text-white hover:text-gray-300 inline-flex items-center justify-center p-2 rounded-md focus:outline-none"
+            >
+              <svg
+                width="20"
+                height="20"
+                fill="currentColor"
+                className="w-8 h-8"
+                viewBox="0 0 1792 1792"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path d="M1664 1344v128q0 26-19 45t-45 19h-1408q-26 0-45-19t-19-45v-128q0-26 19-45t45-19h1408q26 0 45 19t19 45zm0-512v128q0 26-19 45t-45 19h-1408q-26 0-45-19t-19-45v-128q0-26 19-45t45-19h1408q26 0 45 19t19 45zm0-512v128q0 26-19 45t-45 19h-1408q-26 0-45-19t-19-45v-128q0-26 19-45t45-19h1408q26 0 45 19t19 45z">
+                            </path>
+              </svg>
+            </button>
+          </div>
+        </div>
+      </div>
+      <div
+        className={`md:hidden ${isMobileMenuOpen ? 'block' : 'hidden'}`}
+      >
+        <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3">
+          {menuItems.map((item) => (
+            <Link key={item.url} to={item.url}>
+              <a className="text-gray-300 hover:text-cyan-500 block px-3 py-2 rounded-md text-base font-medium">
+                {item.name}
+              </a>
+            </Link>
+          ))}
+        </div>
+      </div>
+    </nav>
+  );
 }
 
-export default Navbar
+export default Navbar;
