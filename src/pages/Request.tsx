@@ -47,10 +47,22 @@ const ProductCard: React.FC<{ product: Product; isSelected: boolean; onSelect: (
   </div>
 );
 
+type CountryCode = {
+  code: string,
+  name: string
+}
+const countries: CountryCode[] = [
+  { code: '+62', name: 'Indonesia' },
+  { code: '+1', name: 'United States' },
+];
+
 const Request: React.FC = () => {
   const [activeTab, setActiveTab] = useState('All');
   const [filteredProducts, setFilteredProducts] = useState<Product[]>(productCatalog);
   const [selectedProductIds, setSelectedProductIds] = useState<number[]>([]);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [selectedCountry, setSelectedCountry] = useState<CountryCode>(countries[0] )
+  const [phoneNumber, setPhoneNumber] = useState<string>('')
 
   const handleTabClick = (category: string) => {
     if (category === 'All') {
@@ -70,11 +82,20 @@ const Request: React.FC = () => {
     );
   };
 
-  const handleSubmit = () => {
-    const Payload: number[] = selectedProductIds;
-    console.log(Payload);
-    // You can use the Payload array as needed, e.g., send it to a server
+//   const handleSubmit = () => {
+//   const payload = selectedProductIds.join(',');
+//   const whatsappUrl = `https://wa.me/6282227755886?text=pickit.com%2F${payload}`;
+//   window.location.href = whatsappUrl;
+// };
+
+  const openModal = () => {
+    setIsModalOpen(true);
   };
+
+  const closeModal = () => {
+    setIsModalOpen(false);
+  };
+
 
   return (
     <div className="container mx-auto p-4">
@@ -101,10 +122,73 @@ const Request: React.FC = () => {
       </div>
       <button
         className="mt-4 px-4 py-2 bg-blue-500 text-white rounded-md hover:bg-blue-600"
-        onClick={handleSubmit}
+        onClick={openModal}
       >
         Submit
       </button>
+
+      {isModalOpen && (
+        <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50">
+          <div className="bg-white p-4 rounded-lg shadow-md">
+            <h2 className="text-lg font-semibold mb-4">Send Request to:</h2>
+            <form>
+              <div className="mb-4">
+                <label htmlFor="country" className="block text-sm font-medium text-gray-700">
+                  Country
+                </label>
+                <select
+                  id="country"
+                  name="country"
+                  className="mt-1 p-2 w-full border rounded-md"
+                  value={selectedCountry.code}
+                  onChange={(e) => {
+                    const countryCode: string = e.target.value;
+                    const selected = countries.find((country) => country.code === countryCode);
+                    if (selected) {
+                      setSelectedCountry(selected);
+                    }
+                  }}
+                >
+                  {countries.map((country) => (
+                    <option key={country.code} value={country.code}>
+                      {country.name} ({country.code})
+                    </option>
+                  ))}
+                </select>
+              </div>
+              <div className="mb-4">
+                <label htmlFor="phoneNumber" className="block text-sm font-medium text-gray-700">
+                  Whatsapp Number
+                </label>
+                <input
+                  type="tel"
+                  id="phoneNumber"
+                  name="phoneNumber"
+                  value={phoneNumber}
+                  onChange={(e) => setPhoneNumber(e.target.value)}
+                  className="mt-1 p-2 w-full border rounded-md"
+                  placeholder="Enter recipient Number"
+                />
+              </div>
+              <button
+                type="button"
+                className="px-4 py-2 bg-blue-500 text-white rounded-md hover:bg-blue-600"
+                onClick={() => {
+                  const payload = selectedProductIds.join(',');
+                  const modPhoneNumber = phoneNumber.slice(1)
+                  const Url = `https://wa.me/${selectedCountry.code}${modPhoneNumber}?text=http://pickit.com/order/${payload}`;
+                  const whatsappUrl = encodeURI(Url)
+                  window.location.href = whatsappUrl;
+                  closeModal();
+                }}
+              >
+                Submit
+              </button>
+            </form>
+          </div>
+        </div>
+      )}
+
     </div>
   );
 };
