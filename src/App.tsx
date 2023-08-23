@@ -1,25 +1,25 @@
-import { BrowserRouter, Route, Routes } from 'react-router-dom'
-
-
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 
 
 import Home from './pages/Home'
 import Request from './pages/Request'
 import Order from './pages/Order'
 import Navbar from './components/Navbar'
+import InvalidData from './components/InvalidData';
 
 function App() {
 
   return (
 
-<BrowserRouter>
-<Navbar />
+<Router>
+  <Navbar />
       <Routes>
         <Route path="/" element={<Home />}/>
         <Route path="/request" element={<Request/>}/>
-        <Route path="/order" element={<Order />}/>
+        <Route path="/order" element={<InvalidData />}/>
+        <Route path="/order/:orderData" element={<Order />}/>
       </Routes>
-    </BrowserRouter>
+</Router>
 
   )
 }

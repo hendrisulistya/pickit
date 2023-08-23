@@ -175,8 +175,9 @@ const Request: React.FC = () => {
                 className="px-4 py-2 bg-blue-500 text-white rounded-md hover:bg-blue-600"
                 onClick={() => {
                   const payload = selectedProductIds.join(',');
+                  const encodedData = btoa(JSON.stringify(payload));
                   const modPhoneNumber = phoneNumber.slice(1)
-                  const Url = `https://wa.me/${selectedCountry.code}${modPhoneNumber}?text=http://pickit.com/order/${payload}`;
+                  const Url = `https://wa.me/${selectedCountry.code}${modPhoneNumber}?text=http://pickit.com/order/${encodedData}`;
                   const whatsappUrl = encodeURI(Url)
                   window.location.href = whatsappUrl;
                   closeModal();
