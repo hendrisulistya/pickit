@@ -16,18 +16,18 @@ function Navbar() {
   ];
 
   return (
-    <nav className="bg-blue-500 shadow">
+    <nav className="bg-violet-400 shadow">
       <div className="px-8 mx-auto max-w-9xl">
         <div className="flex items-center justify-between h-16">
           <div className="w-full flex items-center">
             <Link to="/" className="flex items-center space-x-2">
               <img src={logo} alt="logo" className="w-1/12 p-5" />
-              <p className="text-gray-300 font-black text-2xl">PICK IT</p>
+              <p className="text-violet-700 font-black text-2xl">PICK IT</p>
             </Link>
             <div className="hidden md:block ml-10 space-x-4">
               {menuItems.map((item) => (
                 <Link key={item.url} to={item.url}>
-                  <a className="text-black hover:text-cyan-500 dark:hover:text-white px-3 py-2 rounded-md text-sm font-medium">
+                  <a className="text-black hover:text-neutral-100 dark:hover:text-white px-3 py-2 rounded-md text-sm font-medium">
                     {item.name}
                   </a>
                 </Link>

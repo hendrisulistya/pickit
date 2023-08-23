@@ -98,7 +98,7 @@ const Request: React.FC = () => {
 
 
   return (
-    <div className="container mx-auto p-4">
+    <div className="container mx-auto p-4 bg-[conic-gradient(at_left,_var(--tw-gradient-stops))] from-sky-400 to-sky-200">
       <h1 className="text-2xl font-bold mb-4">Product Catalog</h1>
       <div className="flex flex-wrap justify-center md:justify-start p-2 space-x-2 mb-4 md:mb-0 mt-2 md:mt-0">
         {['All', 'Jilbab', 'Tas', 'Sandal', 'Sepatu'].map(category => (
