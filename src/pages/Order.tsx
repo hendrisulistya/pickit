@@ -14,7 +14,8 @@ const Order: React.FC = () => {
   // Decode the orderData and handle decoding errors
   let decodedData: number[] = [];
   try {
-    decodedData = JSON.parse(atob(orderData));
+    const decodedString = atob(orderData);
+    decodedData = decodedString.split(',').map(Number);
   } catch (error) {
     return (
       <InvalidData />
@@ -29,7 +30,7 @@ const Order: React.FC = () => {
   );
 
   return (
-    <div className="max-w-3xl mx-auto p-8 bg-[conic-gradient(at_left,_var(--tw-gradient-stops))] from-sky-400 to-sky-200 shadow-lg rounded-lg">
+    <div className="max-w-3xl mx-auto p-8 bg-blue-400 to-blue-200 shadow-lg rounded-lg">
       <h2 className="text-2xl font-semibold mb-4">Ordered Item</h2>
       <table className="w-full">
         <thead>

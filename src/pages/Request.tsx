@@ -82,12 +82,6 @@ const Request: React.FC = () => {
     );
   };
 
-//   const handleSubmit = () => {
-//   const payload = selectedProductIds.join(',');
-//   const whatsappUrl = `https://wa.me/6282227755886?text=pickit.com%2F${payload}`;
-//   window.location.href = whatsappUrl;
-// };
-
   const openModal = () => {
     setIsModalOpen(true);
   };
@@ -177,7 +171,7 @@ const Request: React.FC = () => {
                   const payload = selectedProductIds.join(',');
                   const encodedData = btoa(JSON.stringify(payload));
                   const modPhoneNumber = phoneNumber.slice(1)
-                  const Url = `https://wa.me/${selectedCountry.code}${modPhoneNumber}?text=http://pickit.com/order/${encodedData}`;
+                  const Url = `https://wa.me/${selectedCountry.code}${modPhoneNumber}?text=http://pickit-app.netlify.app/order/${encodedData}`;
                   const whatsappUrl = encodeURI(Url)
                   window.location.href = whatsappUrl;
                   closeModal();

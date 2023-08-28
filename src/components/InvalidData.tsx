@@ -8,7 +8,7 @@ function InvalidData(){
       <p className="text-lg text-gray-600 mb-8">Your Ordered data didn't exist </p>
 
       <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full">
-        <Link to="/home" className="text-black" >Back to Home</Link>
+        <Link to="/" className="text-black" >Back to Home</Link>
       </button>
       
     </div>
